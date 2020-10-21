@@ -4,34 +4,47 @@ botaoAdicionar.addEventListener("click", function (event) {
 
   // pega dados do paciente
   var formNovoPaciente = document.querySelector("#form-novo-paciente");
-  var pacienteNome = formNovoPaciente.nome.value;
-  var pacientePeso = formNovoPaciente.peso.value;
-  var pacienteAltura = formNovoPaciente.altura.value;
-  var pacienteGordura = formNovoPaciente.gordura.value;
-  // fim - pega dados do paciente
+  var paciente = obtemDadosPaciente(formNovoPaciente);
 
-  // cria elementos html
-  var linhaPaciente = document.createElement("tr");
-  var colunaPacienteNome = document.createElement("td");
-  var colunaPacientePeso = document.createElement("td");
-  var colunaPacienteAltura = document.createElement("td");
-  var colunaPacienteGordura = document.createElement("td");
-  var colunaPacienteImc = document.createElement("td");
-
-  colunaPacienteNome.textContent = pacienteNome;
-  colunaPacientePeso.textContent = pacientePeso;
-  colunaPacienteAltura.textContent = pacienteAltura;
-  colunaPacienteGordura.textContent = pacienteGordura;
-  colunaPacienteImc.textContent = calculaImc(pacientePeso, pacienteAltura);
-  // fim - cria elementos html
+  // cria linha html do paciente
+  var linhaPaciente = criaLinhaPaciente();
 
   // adiciona paciente na tabela			
   var tabelaPacientes = document.querySelector("#tabela-pacientes");
   tabelaPacientes.appendChild(linhaPaciente);
-  linhaPaciente.appendChild(colunaPacienteNome);
-  linhaPaciente.appendChild(colunaPacientePeso);
-  linhaPaciente.appendChild(colunaPacienteAltura);
-  linhaPaciente.appendChild(colunaPacienteGordura);
-  linhaPaciente.appendChild(colunaPacienteImc);
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.nome, "info-nome"));
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.peso, "info-peso"));
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.altura, "info-altura"));
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.gordura, "info-gordura"));
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.imc, "info-imc"));
   // fim - adiciona paciente na tabela
+
+  formNovoPaciente.reset();
 });
+
+function obtemDadosPaciente(form) {
+  var paciente = {
+    nome: form.nome.value,
+    peso: form.peso.value,
+    altura: form.altura.value,
+    gordura: form.gordura.value,
+    imc: calculaImc(form.peso.value, form.altura.value)
+  }
+
+  return paciente;
+}
+
+function criaLinhaPaciente() {
+  var linhaPaciente = document.createElement("tr");
+  linhaPaciente.classList.add("paciente");
+
+  return linhaPaciente;
+}
+
+function criaColunaPaciente(valor, classe) {
+  var colunaPaciente = document.createElement("td");
+  colunaPaciente.classList.add(classe);
+  colunaPaciente.textContent = valor;
+
+  return colunaPaciente;
+}
