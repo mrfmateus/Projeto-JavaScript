@@ -20,6 +20,8 @@
 	<main>
 		<section class="container">
 			<h2>Meus pacientes</h2>
+			<label for="filtra">Filtre:</label>
+			<input type="text" name="filtra" id="filtra" placeholder="digite o nome do paciente">
 			<table>
 				<thead>
 					<tr>
@@ -34,7 +36,7 @@
 					<tr id="primeiro-paciente" class="paciente">
 						<td class="info-nome">Paulo</td>
 						<td class="info-peso">100</td>
-						<td class="info-altura">2.00</td>
+						<td class="info-altura">-2.00</td>
 						<td class="info-gordura">10</td>
 						<td class="info-imc">0</td>
 					</tr>
@@ -42,7 +44,7 @@
 					<tr class="paciente">
 						<td class="info-nome">João</td>
 						<td class="info-peso">80</td>
-						<td class="info-altura">11.72</td>
+						<td class="info-altura">1.72</td>
 						<td class="info-gordura">40</td>
 						<td class="info-imc">0</td>
 					</tr>
@@ -104,6 +106,8 @@
 	<script src="js/calcula-imc.js"></script>
 	<script src="js/form.js"></script>
 	<script src="js/remover-paciente.js"></script>
+	<script src="js/filtra.js"></script>
+	<script src="js/buscar-pacientes.js"></script>
 </body>
 
 </html>
