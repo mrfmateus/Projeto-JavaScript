@@ -6,10 +6,6 @@ botaoAdicionar.addEventListener("click", function (event) {
   var formNovoPaciente = document.querySelector("#form-novo-paciente");
   var paciente = obtemDadosPaciente(formNovoPaciente);
 
-  // cria linha html do paciente
-  var linhaPaciente = criaLinhaPaciente();
-
-  // adiciona paciente na tabela
   var erros = validaPaciente(paciente);
 
   if (erros.length > 0) {
@@ -17,19 +13,19 @@ botaoAdicionar.addEventListener("click", function (event) {
     return;
   }
 
-  var tabelaPacientes = document.querySelector("#tabela-pacientes");
-  tabelaPacientes.appendChild(linhaPaciente);
-  linhaPaciente.appendChild(criaColunaPaciente(paciente.nome, "info-nome"));
-  linhaPaciente.appendChild(criaColunaPaciente(paciente.peso, "info-peso"));
-  linhaPaciente.appendChild(criaColunaPaciente(paciente.altura, "info-altura"));
-  linhaPaciente.appendChild(criaColunaPaciente(paciente.gordura, "info-gordura"));
-  linhaPaciente.appendChild(criaColunaPaciente(paciente.imc, "info-imc"));
-  // fim - adiciona paciente na tabela
+  adicionaPacienteNaTabela(paciente);
 
   formNovoPaciente.reset();
   var listaErros = document.querySelector("#mensagens-erro");
   listaErros.innerHTML = "";
 });
+
+function adicionaPacienteNaTabela(paciente) {
+  // cria linha html do paciente
+  var linhaPaciente = criaLinhaPaciente(paciente);
+  var tabelaPacientes = document.querySelector("#tabela-pacientes");
+  tabelaPacientes.appendChild(linhaPaciente);
+}
 
 function obtemDadosPaciente(form) {
   var paciente = {
@@ -73,10 +69,14 @@ function validaPaciente(paciente) {
   return erros;
 }
 
-function criaLinhaPaciente() {
+function criaLinhaPaciente(paciente) {
   var linhaPaciente = document.createElement("tr");
   linhaPaciente.classList.add("paciente");
-
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.nome, "info-nome"));
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.peso, "info-peso"));
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.altura, "info-altura"));
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.gordura, "info-gordura"));
+  linhaPaciente.appendChild(criaColunaPaciente(paciente.imc, "info-imc"));
   return linhaPaciente;
 }
 

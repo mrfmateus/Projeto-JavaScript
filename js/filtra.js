@@ -11,11 +11,5 @@ filtroNome.addEventListener("input", function (event) {
     } else {
       paciente.classList.add("invisivel");
     }
-
-    // if ((event.target.value == pacienteNome) || (event.target.value.length <= 0)) {
-    //   paciente.classList.remove("invisivel");
-    // } else {
-    //   paciente.classList.add("invisivel");
-    // }
   });
 });
